@@ -1,0 +1,37 @@
+Team <Undecided>
+Members: Conan Wong, Anthony Chen & Sebastian Dittgen
+
+Idea: A recreation of Conan and Suwamik's favorite pastime, Choprock. It
+will allow two people on the same network to play a game in real time.
+The game consists of two players playing rock, paper, scissors repeatedly to
+determine who gets to make the move in chopsticks. The player who wins in
+the chopsticks portion of the game wins.
+
+Interface: A user enters their name and waits for a match with another user.
+During the match, the users pick either rock, paper, or scissors and the winner
+of rock,paper,scissors is allowed to make a move (strike, transfer fingers, etc.)
+and the loser is required to wait until the winner chooses a move. Repeat until
+a winner is found in the chopsticks portion.
+
+Design: It will utilize a handshake system similar to the one we had to do for
+homework, as well as a backend that recieves the input and sends out the
+necessary information to each client. When we learn how to establish the
+connection through the network, that will also be used. There will be heavy
+stress on processes, memory allocation, and networking.
+
+Work breakdown:
+Anthony - Client
+Sebastian - Server
+Conan - Backend
+[Everyone will work on each part, but predominantly the one listed]
+
+Data structures used: Some experimentation with arrays to be able to host
+and mix-match users for matches. Storing data efficiently will be one of our
+priorities, so there's an indecision on which structure is the best currently.
+
+Completion date of parts:
+Client -> 3rd day into work
+Server -> 4th day into work
+Backend -> 5th day into work
+==Support for multiple users: 6-7th day into work
+
