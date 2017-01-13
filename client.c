@@ -1,17 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <errno.h>
 
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <arpa/inet.h>
+#include "network.h"
+
 
 int main(){
-  // Connecting to server [3 way handshake]
+  int sd;
+  char *host = "127.0.0.1";
   
+  sd = client_connect( host );
+ 
+  printf("Sending Foo.\n");
+  char buff[128];
+  strncpy(buff, "Foo", sizeof(buff));
+
+  write( sd, buff, sizeof(buff) );
+  read ( sd, buff, sizeof(buff) );
+
+  printf("Recieved: %s\n", buff);
+	
   // while loop
 
   // clear terminal window
