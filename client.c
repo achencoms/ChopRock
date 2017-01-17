@@ -9,16 +9,18 @@
 
 int main(){
   int sd;
-  char *host = "127.0.0.1";
+  char *host = "149.89.150.112";
   
   sd = client_connect( host );
  
-  printf("Sending Foo.\n");
+  printf("\nSending Foo.\n");
   char buff[128];
   strncpy(buff, "Foo", sizeof(buff));
 
   write( sd, buff, sizeof(buff) );
   read ( sd, buff, sizeof(buff) );
+   
+  close(sd);
 
   printf("Recieved: %s\n", buff);
 	

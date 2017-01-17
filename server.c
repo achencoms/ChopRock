@@ -18,6 +18,8 @@ int main(){
    strncpy(buff, "Thanks for the foo", sizeof(buff));
    write(connection, buff, sizeof(buff));
 
+   close(connection);
+
    return 0;
 }
 
