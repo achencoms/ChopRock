@@ -9,23 +9,20 @@
 
 int main(){
   int sd;
-  char *host = "149.89.150.112";
-  
+  char *host = "127.0.0.1";
+
   sd = client_connect( host );
- 
-  printf("\nSending Foo.\n");
+
+  printf("Sending Foo.\n");
   char buff[128];
-  strncpy(buff, "Foo", sizeof(buff));
+  while(fgets(buff,sizeof(buff), stdin) != NULL){
+ 	 //strncpy(buff, "Foo", sizeof(buff));
+ 	 write( sd, buff, sizeof(buff) );
+ 	 read ( sd, buff, sizeof(buff) );
+  	 printf("Recieved: %s\n", buff);
+  }
 
-  write( sd, buff, sizeof(buff) );
-  read ( sd, buff, sizeof(buff) );
-   
   close(sd);
-
-  printf("Recieved: %s\n", buff);
-	
-  // while loop
-
   // clear terminal window
   // reading data from server
   // input request (rps)

@@ -13,12 +13,11 @@ int main(){
    int connection = server_connect( sd );
  
    char buff[128];
-   read(connection, buff, sizeof(buff));
-     
-   strncpy(buff, "Thanks for the foo", sizeof(buff));
-   write(connection, buff, sizeof(buff));
-
-   close(connection);
+   while(read(connection, buff, sizeof(buff))){
+	 printf("Received message: %s", buff);
+   	 strncpy(buff, "Thanks for the foo", sizeof(buff));
+   	 write(connection, buff, sizeof(buff));
+   }
 
    return 0;
 }
