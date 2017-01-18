@@ -10,15 +10,20 @@ int main(){
    int sd;
  
    sd = server_setup();
-   int connection = server_connect( sd );
- 
-   char buff[128];
-   while(read(connection, buff, sizeof(buff))){
-	 printf("Received message: %s", buff);
-   	 strncpy(buff, "Thanks for the foo", sizeof(buff));
-   	 write(connection, buff, sizeof(buff));
-   }
+   while(1){
+  	int connection = server_connect( sd );
 
+	int f = fork();
+	if(f == 0){
+   	 char buff[128];
+ 	 while(read(connection, buff, sizeof(buff))){
+	  printf("Received message: %s", buff);
+   	  strncpy(buff, "Thanks for the foo", sizeof(buff));
+   	  write(connection, buff, sizeof(buff));
+   	 }
+	 exit(0);
+        }
+   }
    return 0;
 }
 
