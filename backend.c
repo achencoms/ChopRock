@@ -19,4 +19,36 @@ int rps(int p1, int p2){ // 0 = rock. 1 = paper. 2 = scissor
    } 
 }
 
+void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, int num, int player){
+  //m - move choice (a for attack, s for switch)
+  //num- number of fingers moved | (-) means move towards left, (+) means move towards right.
+  //player making move. - 1 for p1, 2 for p2
 
+  if (m == 'a'){
+    if (player == 1){
+      if (num < 0){ //player1 attacking left or right
+	*p2lh -= num;}
+      else{
+	*p2rh += num;}
+    }
+
+    else{
+      if (num < 0){ // player2 attacking left or right
+	*p1lh -= num;}
+      else{
+	*p1rh += num;}
+    }
+  }
+
+  else {
+    if (player == 1){ //player1 moving fingers.
+      *p1lh -= num;
+      *p1rh += num;
+    }
+
+    else{ //player2 moving fingers
+      *p2lh -= num;
+      *p2rh += num;
+    }
+  }
+}
