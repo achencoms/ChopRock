@@ -5,7 +5,9 @@
 #include <errno.h>
 
 #include "network.h"
+#include "client.h"
 
+#define clear() printf("\033[H\033[J")
 
 int main(){
   int sd;
@@ -15,11 +17,35 @@ int main(){
 
   printf("Sending Foo.\n");
   char buff[128];
-  while(fgets(buff,sizeof(buff), stdin) != NULL){
- 	 //strncpy(buff, "Foo", sizeof(buff));
+  /*while(fgets(buff,sizeof(buff), stdin) != "\n"){
  	 write( sd, buff, sizeof(buff) );
  	 read ( sd, buff, sizeof(buff) );
   	 printf("Recieved: %s\n", buff);
+  }*/
+
+  while(1){
+     clear();
+     printf("Connection established\nWaiting for match...\n");
+     read ( sd, buff, sizeof(buff) );
+     /*if(!strncmp(buff,"match",sizeof(buff)){
+	printf("Match made!\n");
+	sleep(3);	        
+	clear()
+     }*/
+
+     if (!strncmp(buff,"rps",sizeof(buff)){
+	printf("Do you wish to play rock, paper or scissors?\n");
+	fgets(buff,sizeof(buff),stdin);	
+
+	while(error(&buff,"rps")){
+	   clear();
+	   printf("Do you wish to play rock, paper or scissors?\n");
+	   fgets(buff,sizeof(buff),stdin);
+	}	
+     }
+
+     else if (!strncmp(buff,"move",sizeof(buff)){
+     }
   }
 
   close(sd);
@@ -39,3 +65,20 @@ int main(){
 
 void display(int ohl, int ohr, int mhl, int mhr){
 }
+
+int error(char * buff,char * phase){
+   char* rps[3] = {"rock","paper","scissors"};   
+   char* move[2] = {"attack","move"};
+   char* movea[2] = {"left","right"};
+   char* f;
+   f = strstr(buff,"\n",sizeof(buff))
+   f = 0;
+
+   if (!strncmp(phase,"rps",sizeof(phase)){
+   
+   }
+
+   else if (!strncmp(phase,"move",sizeof(phase)){
+   }
+}
+
