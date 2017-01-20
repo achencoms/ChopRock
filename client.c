@@ -22,7 +22,22 @@ int main(){
  	 read ( sd, buff, sizeof(buff) );
   	 printf("Recieved: %s\n", buff);
   }*/
+	
+  //starting to match make for a player
+  printf("Waiting for a player to join...\n");
+  //read for a response for the server to search for another player
+  read(sd,buff,sizeof(buff) );
+  //allow the user to start playing the other user
+  printf("You have successfully connected with another player!\n");
 
+  while(read (sd, buff, sizeof(buff)) != 0){
+	 printf("[SERVER]: %s", buff);
+	 if(!strcmp(buff,"It is your turn to go\n")){
+         fgets(buff, sizeof(buff), stdin);
+ 	 write( sd, buff, sizeof(buff) );
+	 }
+  }
+	
   while(1){
      clear();
      printf("Connection established\nWaiting for match...\n");
