@@ -15,6 +15,7 @@ int main(){
    char buff[128];
    char turn[] = "It is your turn to go\n";
    char notturn[] = "It is the other player's turn, please wait...\n";
+   char rps[] = "Choose rock, paper, scissors\n";
 
    sd = server_setup();
    while(1){
@@ -28,28 +29,36 @@ int main(){
 
 	int f = fork();
 	if(f == 0){
-  	 int choose = 0;
-	while(1){
-	//while(read(connection1, buff, sizeof(buff)) || read(connection2, buff, sizeof(buff))){
-         if(choose == 0){
-	  strcpy(buff,turn);
-	  write(connection1, buff, sizeof(buff));
-	  strcpy(buff,notturn);
-	  write(connection2, buff, sizeof(buff));
- 	  read(connection1, buff, sizeof(buff));
-	  printf("Message from Player 1: %s", buff);
-	  choose = 1;
-   	 }
-	 else{
-	  strcpy(buff,turn);
-	  write(connection2, buff, sizeof(buff));
-	  strcpy(buff,notturn);
-	  write(connection1, buff, sizeof(buff));
-	  read(connection2, buff, sizeof(buff));
-	  printf("Message from Player 2: %s", buff);
-	  choose = 0;
-	 }
-	}
+	    while(1){
+
+	      strcpy(buff,rps);//ask for rps choice
+	      write(connection1, buff,sizeof(buff));
+	      read
+		int choose = -1;
+	      if(choose == 0){
+		strcpy(buff,turn);//notify user1
+		write(connection1, buff, sizeof(buff));
+	  
+		strcpy(buff,notturn);//notify user2
+		write(connection2, buff, sizeof(buff));
+
+		read(connection1, buff, sizeof(buff));//take user1 csmove
+		printf("Message from Player 1: %s", buff);
+		choose = 1;
+	      }
+	 
+	      else{
+		strcpy(buff,turn);//notify user2
+		write(connection2, buff, sizeof(buff));
+
+		strcpy(buff,notturn);//notify user1
+		write(connection1, buff, sizeof(buff));
+
+		read(connection2, buff, sizeof(buff));//take user2 csmove
+		printf("Message from Player 2: %s", buff);
+		choose = 0;
+	      }
+	    }
 	 exit(0);
         }
    }
