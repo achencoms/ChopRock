@@ -14,6 +14,7 @@ int main(){
   char *host = "127.0.0.1";
 
   sd = client_connect( host );
+  printf("Connected to the server...\n");
 
   printf("Sending Foo.\n");
   char buff[128];
