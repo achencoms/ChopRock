@@ -1,5 +1,18 @@
-int rps(int p1, int p2){ // 0 = rock. 1 = paper. 2 = scissor
-   int diff = p1 - p2;
+int rps(char * c1, char * c2){ // 0 = rock. 1 = paper. 2 = scissor
+   int p1,p2;
+   //convert user1 string choice
+   if(!strcmp(c1,"rock\n")) p1 = 0;
+   else if(!strcmp(c1,"paper\n")) p1 = 1;
+   else if(!strcmp(c1, "scissor\n")) p1 = 2;
+   else return 3;
+   //convert user2 string choice
+   if(!strcmp(c2,"rock\n")) p2 = 0;
+   else if(!strcmp(c2,"paper\n")) p2 = 1;
+   else if(!strcmp(c2, "scissor\n")) p2 = 2;
+   else return 3;
+
+  //calculate who wins 
+  int diff = p1 - p2;
    if (!diff){
       return 0; //tie.
    }

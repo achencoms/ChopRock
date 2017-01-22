@@ -16,7 +16,6 @@ int main(){
   sd = client_connect( host );
   printf("Connected to the server...\n");
 
-  printf("Sending Foo.\n");
   char buff[128];
   /*while(fgets(buff,sizeof(buff), stdin) != "\n"){
  	 write( sd, buff, sizeof(buff) );
@@ -40,7 +39,7 @@ int main(){
     
     if(!strcmp(buff,"Choose rock, paper, scissors\n")){
       fgets(buff, sizeof(buff), stdin);
-      write( sd, buff, sizeof(buff))
+      write( sd, buff, sizeof(buff));
     }
   }
 }
@@ -53,10 +52,11 @@ int error(char * buff,char * phase){
   char* movea[2] = {"left","right"};
   char* f;
   
-  if (!strncmp(phase,"rps",sizeof(phase)){
+  if (!strncmp(phase,"rps",sizeof(phase))){
       
     }
 
- else if (!strncmp(phase,"move",sizeof(phase)){
+ else if (!strncmp(phase,"move",sizeof(phase))){
    }
     
+}
