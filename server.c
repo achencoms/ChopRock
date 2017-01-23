@@ -22,20 +22,24 @@ int main(){
    while(1){
   	int connection1 = server_connect( sd );
 	printf("Player 1 connected to the server! Waiting for a match...\n");
-        int connection2 = server_connect( sd );
+    int connection2 = server_connect( sd );
 	printf("Player 2 connected to the server! Match ready!\n");
 	strcpy(buff, "You have found a match!\n");
 	write(connection1, buff, sizeof(buff));
 	write(connection2, buff, sizeof(buff));
-
-	int p1 = 1;
-	int p2 = 1;
+	//hands
+	int p1lh = 1;
+	int p1rh = 1;
+	int p2rh = 1;
+	int p2lh = 1;
+	
 	int f = fork();
 	if(f == 0){
 	    while(1){
+		  printf("Currently, Player 1 has %d fingers on his left hand, and %d fingers on his right hand!\n", p1lh, p1rh);
+		  printf("Currently, Player 2 has %d fingers on his left hand, and %d fingers on his right hand!\n", p2lh, p2rh);
 	      int choose = 0;
-	      printf("sloppy\n");
-              //rps phase
+          //rps phase
 	      strcpy(buff,ask);//ask for rps choice
 	      while(choose == 0){
 	        write(connection1, buff, sizeof(buff));
@@ -44,30 +48,89 @@ int main(){
 	        read(connection1, c1, sizeof(c1));
 	        read(connection2, c2, sizeof(c2));
 	        choose = rps(c1,c2);
-		printf("%d\n",choose);
 	      }
 	      
 	      //chopsticks phase
 	      if(choose == 1){
-		strcpy(buff,turn);//notify user1
-		write(connection1, buff, sizeof(buff));
+			strcpy(buff,turn);//notify user1
+			write(connection1, buff, sizeof(buff));
 	  
-		strcpy(buff,notturn);//notify user2
-		write(connection2, buff, sizeof(buff));
+			strcpy(buff,notturn);//notify user2
+			write(connection2, buff, sizeof(buff));
 
-		read(connection1, buff, sizeof(buff));//take user1 csmove
-		printf("Message from Player 1: %s", buff);
+			read(connection1, buff, sizeof(buff));//take user1 csmove
+			if(*buff == 'a') {
+				char * wich = strstr(buff, "k");
+				wich++;
+				if(*wich == 'l'){
+					char * sand = strstr(buff,"left");
+					sand += 4;
+					if(*sand == 'l'){
+						csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', -1, -1, 1);
+					}
+					else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', -1, 1, 1);
+				}
+				else {
+					char * sand = strstr(buff,"right");
+					sand += 5;
+					if(*sand == '1'){
+						csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, -1, 1);
+					}
+					else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, 1, 1);
+				}
+			}
+			else {
+				char * num = strstr(buff,"t");
+				num++;
+				char * yes = strstr(buff,"e");
+				yes++;
+				if(*yes == 'l'){
+					csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'm', -1, *num - 48, 1);
+				}
+				else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'm', 1, *num - 48, 1);
+			}
+			printf("Message from Player 1: %s\n", buff);
 	      }
 	 
 	      else{
-		strcpy(buff,turn);//notify user2
-		write(connection2, buff, sizeof(buff));
+			strcpy(buff,turn);//notify user2
+			write(connection2, buff, sizeof(buff));
 
-		strcpy(buff,notturn);//notify user1
-		write(connection1, buff, sizeof(buff));
+			strcpy(buff,notturn);//notify user1
+			write(connection1, buff, sizeof(buff));
 
-		read(connection2, buff, sizeof(buff));//take user2 csmove
-		printf("Message from Player 2: %s", buff);
+			read(connection2, buff, sizeof(buff));//take user2 csmove
+			if(*buff == 'a') {
+				char * wich = strstr(buff, "k");
+				wich++;
+				if(*wich == 'l'){
+					char * sand = strstr(buff,"left");
+					sand += 4;
+					if(*sand == 'l'){
+						csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', -1, -1, 2);
+					}
+					else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', -1, 1, 2);
+				}
+				else {
+					char * sand = strstr(buff,"right");
+					sand += 5;
+					if(*sand == '1'){
+						csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, -1, 2);
+					}
+					else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, 1, 2);
+				}
+			}
+			else {
+				char * num = strstr(buff,"t");
+				num++;
+				char * yes = strstr(buff,"e");
+				yes++;
+				if(*yes == 'l'){
+					csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'm', -1, *num - 48, 2);
+				}
+				else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'm', 1, *num - 48, 2);
+			}
+			printf("Message from Player 2: %s\n", buff);
 	      }
 	    }
 	 exit(0);

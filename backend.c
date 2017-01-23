@@ -31,36 +31,65 @@ int rps(char * c1, char * c2){ // 0 = rock. 1 = paper. 2 = scissor
    } 
 }
 
-void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, int num, int player){
+void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, char sand, char num, int player){
   //m - move choice (a for attack, s for switch)
+  //sand - which hand player uses
   //num- number of fingers moved | (-) means move towards left, (+) means move towards right.
   //player making move. - 1 for p1, 2 for p2
 
   if (m == 'a'){
     if (player == 1){
       if (num < 0){ //player1 attacking left or right
-	*p2lh -= num;}
+		if(sand < 0){
+			*p2lh += *p1lh; // player1 using left or right hand
+		}
+		else *p2lh += *p1rh;
+	  }
       else{
-	*p2rh += num;}
+		if(sand < 0){
+			*p2rh += *p1lh;
+		}
+		else *p2rh += *p1rh;
+	  }
     }
 
     else{
-      if (num < 0){ // player2 attacking left or right
-	*p1lh -= num;}
+      if (num < 0){ //player2 attacking left or right
+		if(sand < 0){
+			*p1lh += *p2lh; // player2 using left or right hand
+		}
+		else *p1lh += *p2rh;
+	  }
       else{
-	*p1rh += num;}
+		if(sand < 0){
+			*p1rh += *p2lh;
+		}
+		else *p1rh += *p2rh;
+	  }
     }
   }
 
   else {
     if (player == 1){ //player1 moving fingers.
-      *p1lh -= num;
-      *p1rh += num;
+	  if(sand < 0){
+		*p1lh -= num;
+		*p1rh += num;
+	  }
+	  else{
+		*p1rh -= num;
+		*p1lh += num;
+	  }
     }
 
     else{ //player2 moving fingers
-      *p2lh -= num;
-      *p2rh += num;
+      if(sand < 0){
+		*p2lh -= num;
+		*p2rh += num;
+	  }
+	  else{
+		*p2rh -= num;
+		*p2lh += num;
+	  }
     }
   }
 }
