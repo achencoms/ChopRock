@@ -11,7 +11,7 @@
 
 int main(){
   int sd;
-  char *host = "127.0.0.1";
+  char *host = "149.89.150.112";
 
   sd = client_connect( host );
   printf("Connected to the server...\n");
@@ -40,13 +40,14 @@ int main(){
 	  printf("Do you wish to attack or move fingers?\n");
 	  fgets(buff,sizeof(buff),stdin);
 
+	  //printf("%s\n", buff);
 	  while( error(buff,"move") ){
 	    printf("Incorrect input. Please choose: attack or move\n");
 	    fgets(buff,sizeof(buff),stdin);
 	  }
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
-	  strcpy(choice,buff);
+	  strncpy(choice,buff,sizeof(choice));
 	  if(!strncmp(buff,"attack",sizeof(buff))) ctr = 1;
 	  else if(!strncmp(buff,"move",sizeof(buff))) ctr = 3;
 	}
@@ -65,11 +66,11 @@ int main(){
 
 	  if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
-	    strncpy(buff,"",sizeof(buff));
+	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
 	  }
 	  else{
-	    strcat(choice,buff);
+	    strncat(choice,buff,sizeof(choice));
 	    ctr = 2;
 	  }
 	}
@@ -85,13 +86,14 @@ int main(){
 	  }
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
+	  
 	  if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
-	    strncpy(buff,"",sizeof(buff));
+	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
 	  }
 	  else{
-	    strcat(choice,buff);
+	    strncat(choice,buff,sizeof(choice));
 	    ctr = 5;
 	  }
 	}
@@ -107,13 +109,14 @@ int main(){
 	  }
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
+	  
 	  if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
-	    strncpy(buff,"",sizeof(buff));
+	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
 	  }
 	  else{
-	    strcat(choice,buff);
+	    strncat(choice,buff,sizeof(choice));
 	    ctr = 4;
 	  }
 	}
@@ -131,11 +134,11 @@ int main(){
 	  *proc = 0;
 	  if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
-	    strncpy(buff,"",sizeof(buff));
+	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
 	  }
 	  else{
-	    strcat(choice,buff);
+	    strncat(choice,buff,sizeof(choice));
 	    ctr = 5;
 	  }
 	}
@@ -158,16 +161,17 @@ int main(){
 void display(int ohl, int ohr, int mhl, int mhr){    }
 
 int error(char * buff,char * phase){
-  char* rps[4] = {"rock\n","paper\n","scissors\n","back\n"};   
-  char* move[3] = {"attack\n","move\n","back\n"};
-  char* movea[3] = {"left\n","right\n","back\n"};
-  char* num[4] = {"1\n","2\n","3\n","back\n"};
+  char* rps[5] = {"rock\n","paper\n","scissors\n","back\n",0};   
+  char* move[4] = {"attack\n","move\n","back\n",0};
+  char* movea[4] = {"left\n","right\n","back\n",0};
+  char* num[5] = {"1\n","2\n","3\n","back\n",0};
 
   int c = 0;
   
   if (!strncmp(phase,"rps",sizeof(phase))){
     while(rps[c]){
       if (!strncmp(buff,rps[c],sizeof(buff))){
+	//printf("comp: %s and %s\n",rps[c],buff);
 	return 0;
       }
       c++;
@@ -177,7 +181,8 @@ int error(char * buff,char * phase){
 
   else if (!strncmp(phase,"move", sizeof(phase))){
     while(move[c]){
-      if (!strncmp(buff,move[c],sizeof(buff))){
+      if (!strncmp(buff,move[c],sizeof(buff))){	
+	//printf("comp: %s and %s\n",rps[c],buff);
 	return 0;
       }
       c++;
