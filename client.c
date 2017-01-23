@@ -31,14 +31,84 @@ int main(){
   printf("You have successfully connected with another player!\n");
 
   while(read (sd, buff, sizeof(buff)) != 0){
+    clear();
     printf("[SERVER]: %s", buff);
     if(!strcmp(buff,"It is your turn to go\n")){
-      fgets(buff, sizeof(buff), stdin);
-      write( sd, buff, sizeof(buff) );
+            int ctr = 0;
+      char choice[15];
+      char *proc;
+      while( ctr != 4 ){
+	if (ctr == 0){
+	  clear();
+	  printf("Do you wish to attack or move fingers?\n");
+	  fgets(buff,sizeof(buff),stdin);
+
+	  while( error(buff,"move") ){
+	    printf("Incorrect input. Please choose: attack or move\n");
+	    fgets(buff,sizeof(buff),stdin);
+	  }
+	  proc = strstr(buff,"\n");
+	  *proc = 0;
+	  strcat(choice,buff);
+	  ctr++;
+	  if(!strncmp(buff,"attack",sizeof(buff))) ctr = 1;
+	  else if(!strncmp(buff,"move",sizeof(buff))) ctr = 2;
+	}
+	
+	else if (ctr == 1){
+	  clear();
+	  printf("Do you wish to attack left or right?\n");
+	  fgets(buff,sizeof(buff),stdin);
+	  
+	  while( error(buff,"movea") ){
+	    printf("Incorrect input. Please choose: left or right\n");
+	    fgets(buff,sizeof(buff),stdin);
+	  }
+	  proc = strstr(buff,"\n");
+	  *proc = 0;
+	  strcat(choice,buff);
+	  ctr = 4;
+	}
+
+	else if (ctr == 2){
+	  clear();
+	  printf("Do you wish to move left or right?\n");
+	  fgets(buff,sizeof(buff),stdin);
+	  
+	  while( error(buff,"movea") ){
+	    printf("Incorrect input. Please choose: left or right\n");
+	    fgets(buff,sizeof(buff),stdin);
+	  }
+	  proc = strstr(buff,"\n");
+	  *proc = 0;
+	  strcat(choice,buff);
+	  ctr = 3;
+	}
+
+	else if (ctr == 3){
+	  clear();
+	  printf("How many?\n");
+	  fgets(buff,sizeof(buff),stdin);
+	  
+	  while( error(buff,"movea") ){
+	    printf("Incorrect input. Please choose a valid number.\n");
+	    fgets(buff,sizeof(buff),stdin);
+	  }
+	  proc = strstr(buff,"\n");
+	  *proc = 0;
+	  strcat(choice,buff);
+	  ctr = 4;
+	}
+      }
+      write( sd, choice, sizeof(choice));
     }
     
     if(!strcmp(buff,"Choose rock, paper, scissors\n")){
       fgets(buff, sizeof(buff), stdin);
+      while( error(buff,"rps") ){
+	printf("Incorrect input. Please choose: rock, paper or scissors\n");
+	fgets(buff,sizeof(buff),stdin);
+      }      
       write( sd, buff, sizeof(buff));
     }
   }
@@ -47,16 +117,51 @@ int main(){
 void display(int ohl, int ohr, int mhl, int mhr){    }
 
 int error(char * buff,char * phase){
-  char* rps[3] = {"rock","paper","scissors"};   
-  char* move[2] = {"attack","move"};
-  char* movea[2] = {"left","right"};
+  char* rps[3] = {"rock\n","paper\n","scissors\n"};   
+  char* move[2] = {"attack\n","move\n"};
+  char* movea[2] = {"left\n","right\n"};
+  char* num[3] = {"1\n","2\n","3\n"};
   char* f;
+
+  int c = 0;
   
   if (!strncmp(phase,"rps",sizeof(phase))){
-      
+    while(rps[c]){
+      if (!strncmp(buff,rps[c],sizeof(buff))){
+	return 0;
+      }
+      c++;
     }
+    return -1;
+  }
 
- else if (!strncmp(phase,"move",sizeof(phase))){
-   }
-    
+  else if (!strncmp(phase,"move", sizeof(phase))){
+    while(move[c]){
+      if (!strncmp(buff,move[c],sizeof(buff))){
+	return 0;
+      }
+      c++;
+    }
+    return -1;
+  }
+
+  else if (!strncmp(phase,"movea", sizeof(phase))){
+    while(movea[c]){
+      if (!strncmp(buff,movea[c],sizeof(buff))){
+	return 0;
+      }
+      c++;
+    }
+    return -1;
+  }
+
+  else if (!strncmp(phase,"num", sizeof(phase))){
+    while(num[c]){
+      if (!strncmp(buff,num[c],sizeof(buff))){
+	return 0;
+      }
+      c++;
+    }
+    return -1;
+  }
 }

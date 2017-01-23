@@ -28,6 +28,8 @@ int main(){
 	write(connection1, buff, sizeof(buff));
 	write(connection2, buff, sizeof(buff));
 
+	int p1 = 1;
+	int p2 = 1;
 	int f = fork();
 	if(f == 0){
 	    while(1){
