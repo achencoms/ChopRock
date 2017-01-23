@@ -1,0 +1,46 @@
+Development Log for Team Delray
+Anthony Chen, Conan Wong, Sebastian Dittgen
+
+<ac> - Anthony Chen
+<cw> - Conan Wong
+<sd> Sebastian Dittgen
+
+=====
+1/12
+=====
+<cw> Added networking files and began testing.
+
+=====
+1/17
+=====
+<cw> Completed basic networking.
+<ac> Created a constant loop for receiving user input.
+<cw> Created Rock, Paper, Scissors algorithm.
+
+=====
+1/18
+=====
+<ac> Modified server to allow for multiple users.
+<cw> Added a basic implementation of chopsticks: moving and attacking.
+
+=====
+1/19
+=====
+<cw> Added in prompts for client and began error handling.
+
+=====
+1/20
+=====
+<ac> Added in the feature of matchmaking to allow users to automatically pair up with latest client.
+
+=====
+1/22
+=====
+<ac> Integration of Rock, Paper, Scissors.
+<cw> Added chopstick options for winner of Rock, Paper, Scissors and added to error handling.
+<ac> Added casework to chopsticks algorithm and changed server to allow for processing of chopsticks input.
+
+=====
+1/23
+=====
+<cw> Added back function: allows users to backtrack their input.
