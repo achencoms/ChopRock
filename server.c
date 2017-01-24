@@ -74,13 +74,14 @@ int main(){
 	  printf("moo\n");
 	  strcpy(buff,turn);//notify user1
 	  write(connection1, buff, sizeof(buff));
-	  write(connection1, uplay1, sizeof(uplay1));
-	  write(connection1, play2, sizeof(play2));
-	  
+	 
 	  strcpy(buff,notturn);//notify user2
 	  write(connection2, buff, sizeof(buff));
-	  write(connection2, uplay2, sizeof(uplay2));
-	  write(connection2, play1, sizeof(play1));
+
+	  //write(connection2, uplay1,sizeof(uplay1));
+	  //write(connection2, play1, sizeof(play1));
+	  //write(connection2, uplay2, sizeof(uplay2));
+	  //write(connection2, play1, sizeof(play1));
 	  
 	  read(connection1, buff, sizeof(buff));//take user1 csmove
 	  if(*buff == 'a') {
@@ -118,14 +119,15 @@ int main(){
 	
 	else{
 	  strcpy(buff,turn);//notify user2
-	  write(connection2, buff, sizeof(buff));
-	  write(connection2, uplay1,sizeof(uplay1));
-	  write(connection2, play1, sizeof(play1));
+	  write(connection2, buff, sizeof(buff));	  
 	  
 	  strcpy(buff,notturn);//notify user1
 	  write(connection1, buff, sizeof(buff));
-	  write(connection2, uplay2, sizeof(uplay2));
-	  write(connection1, play2, sizeof(play2));
+
+	  //write(connection2, uplay1,sizeof(uplay1));
+	  //write(connection2, play1, sizeof(play1));
+	  //write(connection2, uplay2, sizeof(uplay2));
+	  //write(connection1, play2, sizeof(play2));
 	  
 	  read(connection2, buff, sizeof(buff));//take user2 csmove
 	  if(*buff == 'a') {

@@ -29,14 +29,15 @@ int main(){
 
   while(read(sd,buff,sizeof(buff)) != 0){
     //reading fingers
-    read(sd, uplay, sizeof(uplay) );
-    read(sd, oplay, sizeof(oplay) );
 
     clear();
-    printf("%s",uplay);
-    printf("%s",oplay);
-    printf("[SERVER]: %s", buff);
     if(!strcmp(buff,"Choose rock, paper, scissors\n")){
+      read(sd, uplay, sizeof(uplay) );
+      read(sd, oplay, sizeof(oplay) );
+      
+      printf("%s",uplay);
+      printf("%s",oplay);
+      printf("[SERVER]: %s", buff);
       fgets(buff, sizeof(buff), stdin);
       while( error(buff,"rps") ){
 	printf("Incorrect input. Please choose: rock, paper or scissors\n");
@@ -52,6 +53,9 @@ int main(){
     while( ctr != 5 ){
 	if (ctr == 0){
 	  clear();
+
+	  printf("%s",uplay);
+	  printf("%s",oplay);
 	  printf("Do you wish to attack or move fingers?\n");
 	  fgets(buff,sizeof(buff),stdin);
 
@@ -160,6 +164,13 @@ int main(){
     }
     write( sd, choice, sizeof(choice));
     strncpy(choice,"",sizeof(choice));
+    }
+
+    if(!strncmp(buff,"It is the other player's turn, please wait...\n",sizeof(buff))){
+	clear();
+	printf("%s",uplay);
+	printf("%s",oplay);
+	printf("%s", buff);
     }
   }
 }
