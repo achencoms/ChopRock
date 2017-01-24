@@ -78,6 +78,7 @@ int main(){
 	  printf("%s",uplay);
 	  printf("%s",oplay);
 	  printf("Do you wish to attack or move fingers?\n");
+	  printf("Type attack or move\n");
 	  fgets(buff,sizeof(buff),stdin);
 
 	  //printf("%s\n", buff);
@@ -94,6 +95,7 @@ int main(){
 	
 	else if(ctr == 1){
 	  printf("\nDo you wish to use your left hand or right hand?\nType back to go back.\n");
+	  printf("Type left or right\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while(error(buff,"movea") ){
@@ -117,6 +119,7 @@ int main(){
 	
 	else if (ctr == 2){
 	  printf("\nDo you wish to attack the opponent's left or right hand?\nType back to go back.\n");
+	  printf("Type left or right\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"movea") ){
@@ -141,6 +144,7 @@ int main(){
 
 	else if (ctr == 3){
 	  printf("\nDo you wish to move fingers from your left hand or right hand?\nType back to go back.\n");
+	  printf("Type left or right\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"movea") ){
@@ -165,6 +169,7 @@ int main(){
 
 	else if (ctr == 4){
 	  printf("\nHow many?\nType back to go back.\n");
+	  printf("Pick a number 1 to 3\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"num") ){
