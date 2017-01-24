@@ -150,7 +150,7 @@ int main(){
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
 	  
-	  if(*buff == 'l' && !ol) printf("You don't have any fingers on your left hand!\n");
+	  if(*buff == 'l' && !ul) printf("You don't have any fingers on your left hand!\n");
 	  else if(*buff == 'r' && !ur) printf("You don't have any fingers on your right hand!\n");
 	  else if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
@@ -175,13 +175,15 @@ int main(){
 	  *proc = 0;
 	  char * dir = strstr(choice,"t");
 	  dir--;
-	  if(*dir == 'f' && ul < *buff - 48) printf("You do not have enough fingers to move from your left hand!\n");
-	  else if(*dir == 'h' && ur < *buff - 48) printf("You do not have enough fingers to move from your right hand\n");
-	  else if(!strncmp(buff,"back",sizeof(buff))){
+	  if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
 	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
 	  }
+	  else if(*dir == 'f' && ul < *buff - 48) printf("You do not have enough fingers to move from your left hand!\n");
+	  else if(*dir == 'h' && ur < *buff - 48) printf("You do not have enough fingers to move from your right hand\n");
+	  else if(*dir == 'f' && ((ur + *buff - 48) > 4)) printf("You are moving too many fingers to your right hand!\n");
+	  else if(*dir == 'h' && ((ul + *buff - 48) > 4)) printf("You are moving too many fingers to your left hand\n");
 	  else{
 	    strncat(choice,buff,sizeof(choice));
 	    ctr = 5;

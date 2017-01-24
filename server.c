@@ -94,7 +94,7 @@ int main(){
 	    else {
 	      char * sand = strstr(buff,"right");
 	      sand += 5;
-	      if(*sand == '1'){
+	      if(*sand == 'l'){
 		csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, -1, 1);
 	      }
 	      else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, 1, 1);
@@ -140,7 +140,7 @@ int main(){
 	    else {
 	      char * sand = strstr(buff,"right");
 	      sand += 5;
-	      if(*sand == '1'){
+	      if(*sand == 'l'){
 		csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, -1, 2);
 	      }
 	      else csmove(&p1lh, &p1rh, &p2lh, &p2rh, 'a', 1, 1, 2);
