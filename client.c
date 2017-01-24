@@ -19,6 +19,8 @@ int main(){
   char buff[128];
   char uplay[128];
   char oplay[128];
+  
+  int ur,ul,or,ol;
 	
   //starting to match make for a player
   printf("Waiting for a player to join...\n");
@@ -28,20 +30,39 @@ int main(){
   printf("You have successfully connected with another player!\n");
 
   while(read(sd,buff,sizeof(buff)) != 0){
-    //reading fingers
 
     clear();
     if(!strcmp(buff,"Choose rock, paper, scissors\n")){
       read(sd, uplay, sizeof(uplay) );
       read(sd, oplay, sizeof(oplay) );
       
+	  char * user = strstr(uplay,"have");
+	  user += 5;
+	  ul = *user - 48;
+	  user = strstr(uplay,"and ");
+	  user += 4;
+	  ur = *user - 48;
+	  char * op = strstr(oplay,"has");
+	  op += 4;
+	  ol = *op - 48;
+	  op = strstr(oplay,"and ");
+	  op += 4;
+	  or = *op - 48;
+	  
+	  if(!(or + ol) || !(ul + ur)){
+		  clear();
+		  if(!(or + ol)) printf("You have won the match of ChopRock! We hope you enjoyed playing!\n");
+		  else if(!(ul+ur)) printf("Your opponent has won the match of ChopRock... Come back next time to try again!\n");
+		  return 0;
+	  }
+	  
       printf("%s",uplay);
       printf("%s",oplay);
       printf("[SERVER]: %s", buff);
       fgets(buff, sizeof(buff), stdin);
       while( error(buff,"rps") ){
-	printf("Incorrect input. Please choose: rock, paper or scissors\n");
-	fgets(buff,sizeof(buff),stdin);
+	     printf("Incorrect input. Please choose: rock, paper or scissors\n");
+	     fgets(buff,sizeof(buff),stdin);
       }      
       write( sd, buff, sizeof(buff));
     }    

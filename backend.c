@@ -68,7 +68,7 @@ void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, char sand, char 
 			*p1rh += *p2lh;
 		}
 		else *p1rh += *p2rh;
-		if(*p1rh > 4) *p1lh = 0;
+		if(*p1rh > 4) *p1rh = 0;
 	  }
     }
   }

@@ -55,23 +55,19 @@ int main(){
 	  write(connection1, buff, sizeof(buff));
 	  write(connection2, buff, sizeof(buff));
 
-	  printf("cameltoe\n");
 	  write(connection1,uplay1,sizeof(uplay1));
 	  write(connection1,play2,sizeof(play2));
 	  write(connection2,uplay2,sizeof(uplay2));
-	  write(connection2,play1,sizeof(play1));
-	  printf("moose\n");	  
+	  write(connection2,play1,sizeof(play1)); 
 
 	  //read user1 choice
 	  read(connection1, c1, sizeof(c1));
 	  read(connection2, c2, sizeof(c2));
-	  printf("yes\n");
 	  choose = rps(c1,c2);
 	}
 	
 	//chopsticks phase
 	if(choose == 1){
-	  printf("moo\n");
 	  strcpy(buff,turn);//notify user1
 	  write(connection1, buff, sizeof(buff));
 	 
