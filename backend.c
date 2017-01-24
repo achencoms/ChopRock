@@ -44,12 +44,14 @@ void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, char sand, char 
 			*p2lh += *p1lh; // player1 using left or right hand
 		}
 		else *p2lh += *p1rh;
+		if(*p2lh > 4) *p2lh = 0;
 	  }
       else{
 		if(sand < 0){
 			*p2rh += *p1lh;
 		}
 		else *p2rh += *p1rh;
+		if(*p2rh > 4 ) *p2rh = 0;
 	  }
     }
 
@@ -59,12 +61,14 @@ void csmove(int *p1lh, int *p1rh, int *p2lh, int *p2rh, char m, char sand, char 
 			*p1lh += *p2lh; // player2 using left or right hand
 		}
 		else *p1lh += *p2rh;
+		if(*p1lh > 4) *p1lh = 0;
 	  }
       else{
 		if(sand < 0){
 			*p1rh += *p2lh;
 		}
 		else *p1rh += *p2rh;
+		if(*p1rh > 4) *p1lh = 0;
 	  }
     }
   }

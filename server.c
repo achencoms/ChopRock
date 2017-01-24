@@ -39,48 +39,48 @@ int main(){
     
     int f = fork();
     if(f == 0){
-      while(1){
-	if (p1lh > 4) p1lh = 0;
-	else if (p1rh > 4) p1rh = 0;
-	else if (p2lh > 4) p2lh = 0;
-	else if (p2rh > 4) p2rh = 0;
-	
+      while(1){	
 	sprintf(play1,"Player 1 has %d fingers on his left hand, and %d fingers on his right hand!\n", p1lh, p1rh);
 	sprintf(uplay1,"You have %d fingers on your left hand, and %d fingers on your right hand!\n", p1lh, p1rh);
 	sprintf(play2,"Player 2 has %d fingers on his left hand, and %d fingers on his right hand!\n", p2lh, p2rh);
 	sprintf(uplay2,"You have %d fingers on your left hand, and %d fingers on your right hand!\n", p2lh, p2rh);
 	printf("%s", play1);
 	printf("%s", play2);
-	
+
 	int choose = 0;
+
 	//rps phase
 	strcpy(buff,ask);//ask for rps choice
 	while(choose == 0){
 	  write(connection1, buff, sizeof(buff));
 	  write(connection2, buff, sizeof(buff));
 
-	  //write(connection1, uplay1,sizeof(uplay1));
-	  //write(connection1, play1,sizeof(play1));
-	  //write(connection2, uplay2,sizeof(uplay2));
-	  //write(connection2, play2,sizeof(uplay2));
-	  
+	  printf("cameltoe\n");
+	  write(connection1,uplay1,sizeof(uplay1));
+	  write(connection1,play2,sizeof(play2));
+	  write(connection2,uplay2,sizeof(uplay2));
+	  write(connection2,play1,sizeof(play1));
+	  printf("moose\n");	  
+
 	  //read user1 choice
 	  read(connection1, c1, sizeof(c1));
 	  read(connection2, c2, sizeof(c2));
+	  printf("yes\n");
 	  choose = rps(c1,c2);
 	}
 	
 	//chopsticks phase
 	if(choose == 1){
+	  printf("moo\n");
 	  strcpy(buff,turn);//notify user1
 	  write(connection1, buff, sizeof(buff));
-	  //write(connection1, uplay1, sizeof(uplay1));
-	  //write(connection1, play2, sizeof(play2));
+	  write(connection1, uplay1, sizeof(uplay1));
+	  write(connection1, play2, sizeof(play2));
 	  
 	  strcpy(buff,notturn);//notify user2
 	  write(connection2, buff, sizeof(buff));
-	  // write(connection2, uplay2, sizeof(uplay2));
-	  //write(connection2, play1, sizeof(play1));
+	  write(connection2, uplay2, sizeof(uplay2));
+	  write(connection2, play1, sizeof(play1));
 	  
 	  read(connection1, buff, sizeof(buff));//take user1 csmove
 	  if(*buff == 'a') {
@@ -119,13 +119,13 @@ int main(){
 	else{
 	  strcpy(buff,turn);//notify user2
 	  write(connection2, buff, sizeof(buff));
-	  //write(connection2, uplay1,sizeof(uplay1));
-	  //write(connection2, play1, sizeof(play1));
+	  write(connection2, uplay1,sizeof(uplay1));
+	  write(connection2, play1, sizeof(play1));
 	  
 	  strcpy(buff,notturn);//notify user1
 	  write(connection1, buff, sizeof(buff));
-	  //write(connection2, uplay2, sizeof(uplay2));
-	  //write(connection1, play2, sizeof(play2));
+	  write(connection2, uplay2, sizeof(uplay2));
+	  write(connection1, play2, sizeof(play2));
 	  
 	  read(connection2, buff, sizeof(buff));//take user2 csmove
 	  if(*buff == 'a') {

@@ -11,7 +11,7 @@
 
 int main(){
   int sd;
-  char *host = "149.89.150.112";
+  char *host = "127.0.0.1";
 
   sd = client_connect( host );
   printf("Connected to the server...\n");
@@ -27,9 +27,24 @@ int main(){
   //allow the user to start playing the other user
   printf("You have successfully connected with another player!\n");
 
-  while(read (sd, buff, sizeof(buff)) != 0){
-    clear();  
+  while(read(sd,buff,sizeof(buff)) != 0){
+    //reading fingers
+    read(sd, uplay, sizeof(uplay) );
+    read(sd, oplay, sizeof(oplay) );
+
+    clear();
+    printf("%s",uplay);
+    printf("%s",oplay);
     printf("[SERVER]: %s", buff);
+    if(!strcmp(buff,"Choose rock, paper, scissors\n")){
+      fgets(buff, sizeof(buff), stdin);
+      while( error(buff,"rps") ){
+	printf("Incorrect input. Please choose: rock, paper or scissors\n");
+	fgets(buff,sizeof(buff),stdin);
+      }      
+      write( sd, buff, sizeof(buff));
+    }    
+
     if(!strcmp(buff,"It is your turn to go\n")){
     int ctr = 0;
     char choice[128];
@@ -145,15 +160,6 @@ int main(){
     }
     write( sd, choice, sizeof(choice));
     strncpy(choice,"",sizeof(choice));
-    }
-    
-    if(!strcmp(buff,"Choose rock, paper, scissors\n")){
-      fgets(buff, sizeof(buff), stdin);
-      while( error(buff,"rps") ){
-	printf("Incorrect input. Please choose: rock, paper or scissors\n");
-	fgets(buff,sizeof(buff),stdin);
-      }      
-      write( sd, buff, sizeof(buff));
     }
   }
 }
