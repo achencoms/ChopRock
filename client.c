@@ -11,7 +11,7 @@
 
 int main(){
   int sd;
-  char *host = "127.0.0.1";
+  char *host = "149.89.150.112";
 
   sd = client_connect( host );
   printf("Connected to the server...\n");
@@ -51,8 +51,8 @@ int main(){
 	  
 	  if(!(or + ol) || !(ul + ur)){
 		  clear();
-		  if(!(or + ol)) printf("You have won the match of ChopRock! We hope you enjoyed playing!\n");
-		  else if(!(ul+ur)) printf("Your opponent has won the match of ChopRock... Come back next time to try again!\n");
+		  if(!(or + ol)) printf("You have won the match of ChopRock!\nWe hope you enjoyed playing!\nHopefully he was Suwamik\n");
+		  else if(!(ul+ur)) printf("Your opponent has won the match of ChopRock...\nCome back next time to try again!\nHopefully it wasn't Suwamik.\n");
 		  return 0;
 	  }
 	  
