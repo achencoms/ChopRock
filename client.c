@@ -93,8 +93,7 @@ int main(){
 	}
 	
 	else if(ctr == 1){
-	  clear();
-	  printf("Do you wish to use your left hand or right hand?\nType back to go back.\n");
+	  printf("\nDo you wish to use your left hand or right hand?\nType back to go back.\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while(error(buff,"movea") ){
@@ -103,8 +102,9 @@ int main(){
 	  }
 	  proc = strstr(buff, "\n");
 	  *proc = 0;
-
-	  if(!strncmp(buff,"back",sizeof(buff))){
+	  if(*buff == 'l' && !ul) printf("You do not have any fingers on your left hand\n");
+	  else if(*buff == 'r' && !ur) printf("You do not have any fingers on your right hand\n");
+	  else if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
 	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
@@ -116,8 +116,7 @@ int main(){
 	}
 	
 	else if (ctr == 2){
-	  clear();
-	  printf("Do you wish to attack left or right?\nType back to go back.\n");
+	  printf("\nDo you wish to attack the opponent's left or right hand?\nType back to go back.\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"movea") ){
@@ -127,7 +126,9 @@ int main(){
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
 	  
-	  if(!strncmp(buff,"back",sizeof(buff))){
+	  if(*buff == 'l' && !ol) printf("The opponent doesn't have any fingers on the left hand!\n");
+	  else if(*buff == 'r' && !or) printf("The opponent doesn't have any fingers on the right hand!\n");
+	  else if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
 	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
@@ -139,8 +140,7 @@ int main(){
 	}
 
 	else if (ctr == 3){
-	  clear();
-	  printf("Do you wish to move fingers from your left hand or right hand?\nType back to go back.\n");
+	  printf("\nDo you wish to move fingers from your left hand or right hand?\nType back to go back.\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"movea") ){
@@ -150,7 +150,9 @@ int main(){
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
 	  
-	  if(!strncmp(buff,"back",sizeof(buff))){
+	  if(*buff == 'l' && !ol) printf("You don't have any fingers on your left hand!\n");
+	  else if(*buff == 'r' && !ur) printf("You don't have any fingers on your right hand!\n");
+	  else if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
 	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
@@ -162,8 +164,7 @@ int main(){
 	}
 
 	else if (ctr == 4){
-	  clear();
-	  printf("How many?\nType back to go back.\n");
+	  printf("\nHow many?\nType back to go back.\n");
 	  fgets(buff,sizeof(buff),stdin);
 	  
 	  while( error(buff,"num") ){
@@ -172,7 +173,11 @@ int main(){
 	  }
 	  proc = strstr(buff,"\n");
 	  *proc = 0;
-	  if(!strncmp(buff,"back",sizeof(buff))){
+	  char * dir = strstr(choice,"t");
+	  dir--;
+	  if(*dir == 'f' && ul < *buff - 48) printf("You do not have enough fingers to move from your left hand!\n");
+	  else if(*dir == 'h' && ur < *buff - 48) printf("You do not have enough fingers to move from your right hand\n");
+	  else if(!strncmp(buff,"back",sizeof(buff))){
 	    ctr = 0;
 	    //strncpy(buff,"",sizeof(buff));
 	    strncpy(choice,"",sizeof(choice));
